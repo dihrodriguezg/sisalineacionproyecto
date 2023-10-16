@@ -10,7 +10,7 @@ Ejecución en local
 
 3. Dentro de la consola, clonar el proyecto:
 
-- git clone https://github.com/diegoRodriguez2020/sisalineacionproyecto.git
+- git clone https://github.com/dihrodriguezg/sisalineacionproyecto.git
 
 4. Ingresar credenciales y contraseña personal de github.
 
