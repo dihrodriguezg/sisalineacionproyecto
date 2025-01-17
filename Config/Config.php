@@ -1,5 +1,5 @@
 <?php
-    const BASE_URL = "http://localhost/res_aprendizaje4/";
+    const BASE_URL = "http://localhost/sisalineacionproyecto/";
     const LIBS = "Libraries/";
     const VIEWS = "Views/";
     const DB_HOST = "localhost";
