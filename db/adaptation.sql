@@ -65,9 +65,49 @@ ALTER TABLE `asignatura`
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
--- Constraints for table `res_asignacion_objetos_de_estudio`
+-- Constraints for table `asignatura`
 --
 ALTER TABLE `asignatura`
   ADD CONSTRAINT `asignatura` FOREIGN KEY (`categoria_id`) REFERENCES `categoria_conocimiento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
+--
+-- Table structure for table `resultado_concreto_asignatura`
+--
+CREATE TABLE `resultado_concreto_asignatura` (
+    `id` int NOT NULL,
+    `nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+    `descripcion` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+    `asignatura_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `resultado_concreto_asignatura`
+--
+INSERT INTO `resultado_concreto_asignatura` (`id`, `nombre`, `descripcion`, `asignatura_id`) VALUES
+(1, 'Res', 'El estudiante debe estar en la capacidad de realizar derivadas de diversa índole', 1),
+(2, 'Res', 'El estudiante debe estar en la capacidad de realizar integrales de diversa índole', 2),
+(3, 'Res', 'El estudiante debe estar en la capacidad de desarrollar aplicaciones web', 3),
+(4, 'Res', 'El estudiante debe reconocer las distintas estructuras de datos en C++', 4),
+(5, 'Res', 'El estudiante debe estar en la capacidad de reconocer conceptos básicos de Bases de Datos', 5),
+(6, 'Res', 'El estudiante debe estar en la capacidad de desarrollar aplicaciones distribuidas', 6),
+(7, 'Res', 'El estudiante debe estar en la capacidad de realizar ensayos básicos', 7),
+(8, 'Res', 'El estudiante debe estar en la capacidad de realizar informes científicos básicos', 8);
+
+--
+-- Indexes for table `resultado_concreto_asignatura`
+--
+ALTER TABLE `resultado_concreto_asignatura`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for table `resultado_concreto_asignatura`
+--
+ALTER TABLE `resultado_concreto_asignatura`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for table `resultado_concreto_asignatura`
+--
+ALTER TABLE `resultado_concreto_asignatura`
+  ADD CONSTRAINT `resultado_concreto_asignatura` FOREIGN KEY (`asignatura_id`) REFERENCES `asignatura` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
