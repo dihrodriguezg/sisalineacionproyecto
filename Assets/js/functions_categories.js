@@ -5,21 +5,21 @@ document.addEventListener('DOMContentLoaded', function(){
     let arr = load.split("/");
     let lastItem = arr[arr.length-1];
 
-    assignLearningResultTable = $('#subjectLRTable').DataTable({
+    assignLearningResultTable = $('#subjectCategoryTable').DataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Subject/getSubjectById/" + lastItem,
+            "url": " "+base_url+"/Category/getSubjectById/" + lastItem,
             "dataSrc":""
         },
         "columns":[
-            {"data":"codigo"},
-            {"data":"name_subject"},
-            {"data":"name_teacher"},
-            {"data":"lastname_teacher"}
+            {"data":"id"},
+            {"data":"nombre"},
+            {"data":"descripcion"},
+            {"data":"categoria_id"}
         ],
         dom: 'lBfrtip',
         buttons: [
