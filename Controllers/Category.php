@@ -11,18 +11,6 @@
             $this->views->getView($this,"Category",$data);
         }
 
-        public function getSubject(){
-            $htmlOptions = "";
-            $arrData = $this->model->searchAllSubject();
-            if(count($arrData) > 0){
-                for($i = 0; $i <count($arrData); $i++){
-                    $htmlOptions .= '<option value="'.$arrData[$i]['codigo'].'">'.$arrData[$i]['nombre'].'</option>';
-                }
-            }
-            echo $htmlOptions;
-            die();
-        }
-
 	public function getLRTitleById(int $codeLR){
             $data = $this->model->searchLRTitleById($codeLR);
             return $data['nombre'];
