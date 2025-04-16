@@ -5,7 +5,17 @@
         }
 
         public function EditAssignLearningResult(){
-            if($_POST && !empty($_POST['txtUser']) && !empty($_POST['txtPassword'])){
+            $data['page_tag'] = "Modificar Asignación de Resultados de Aprendizaje";
+            $data['page_title'] = "Modificación Asignación de Resultados de Aprendizaje";
+            $data['page_functions_js'] = "functions_assign_lr.js";
+            $strUser = strtolower(strClean($_POST['txtUser']));
+            $strPassword = strtolower(strClean($_POST['txtPassword']));
+            $session = strtolower(strClean($_POST['txtUser']));
+            $data['user'] = $strUser;
+            $data['pass'] = $strPassword;            
+            $data['session'] = $session;
+            $this->views->getView($this,"EditAssignLearningResult",$data);
+            /*if($_POST && !empty($_POST['txtUser']) && !empty($_POST['txtPassword'])){
                 $strUser = strtolower(strClean($_POST['txtUser']));
                 if(strlen($_POST['txtPassword']) < 64){
                     $strPassword = hash("SHA256", strClean($_POST['txtPassword']));
@@ -25,7 +35,7 @@
                 }
             }else {
                 echo "<script>window.location.href='".baseUrl()."Login'</script>";
-            }
+            }*/
         }
 
         public function getAssignLearningResultById(int $idALR){
