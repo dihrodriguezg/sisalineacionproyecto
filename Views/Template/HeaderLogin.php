@@ -25,18 +25,41 @@
                             Categorías del conocimiento
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/1">Categoría 1</a></li>
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/2">Categoría 2</a></li>
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/3">Categoría 3</a></li>
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/4">Categoría 4</a></li>
-                        </ul>
+                            
+                        <li>
+                            <form class="dropdown-item" name="Cat1" id="Cat1" action="<?= baseUrl() ?>Category/Category/1" method="post">
+                                    <input type="hidden" id="txtUser" name="txtUser" class="form-control"
+                                    value="<?= $data['session']?>" />
+                                    <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Categoría 1</button>
+                            </form>
+                        </li>
+                        <li>
+                            <form class="dropdown-item" name="Cat2" id="Cat2" action="<?= baseUrl() ?>Category/Category/2" method="post">
+                                    <input type="hidden" id="txtUser" name="txtUser" class="form-control"
+                                    value="<?= $data['session']?>" />
+                                    <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Categoría 2</button>
+                            </form>
+                        </li>
+                        <li>
+                            <form class="dropdown-item" name="Cat3" id="Cat3" action="<?= baseUrl() ?>Category/Category/3" method="post">
+                                    <input type="hidden" id="txtUser" name="txtUser" class="form-control"
+                                    value="<?= $data['session']?>" />
+                                    <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Categoría 3</button>
+                            </form>
+                        </li>
+                        <li>
+                            <form class="dropdown-item" name="Cat4" id="Cat4" action="<?= baseUrl() ?>Category/Category/4" method="post">
+                                    <input type="hidden" id="txtUser" name="txtUser" class="form-control"
+                                    value="<?= $data['session']?>" />
+                                    <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Categoría 4</button>
+                            </form>
+                        </li>
+                </ul>
                     </li>
                     <li class="nav-item">
                         <form name="ELR" id="ELR" action="<?= baseUrl() ?>EditLearningResult" method="post">
                                 <input type="hidden" id="txtUser" name="txtUser" class="form-control"
-                                value="<?= $data['user']?>" />
-                                <input type="hidden" id="txtPassword" name="txtPassword" class="form-control" 
-                                value="<?= $data['pass']?>"/>
+                                value="<?= $data['session']?>" />
                                 <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Resultados de aprendizaje</button>
                         </form>
                     </li>
@@ -44,8 +67,6 @@
                         <form name="EALR" id="EALR" action="<?= baseUrl() ?>EditAssignLearningResult" method="post">
                                 <input type="hidden" id="txtUser" name="txtUser" class="form-control"
                                 value="<?= $data['session']?>" />
-                                <input type="hidden" id="txtPassword" name="txtPassword" class="form-control" 
-                                value="<?= $data['pass']?>"/>
                                 <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Asignación de resultados de aprendizaje</button>
                         </form>
                     </li>

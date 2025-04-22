@@ -1,4 +1,5 @@
-<?php pageHeader($data);?>
+<?php pageHeaderLogin($data);?>
+<?php getModal('EditLearningResultModal', $data);?>
 
     <div class="row justify-content-center" id="card-content-page">
     <div class="col-10">
@@ -15,10 +16,11 @@
                         <table class="table table-hover table-centered table-bordered mb-0" id="subjectCategoryTable" style="width:100%">
                         <thead>
                             <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>  
-                            <th>Categoría Id</th>                          
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>  
+                                <th>Categoría Id</th>  
+                                <th>Acciones</th>                        
                             </tr>
                         </thead>
                         <tbody>
