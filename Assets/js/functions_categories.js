@@ -50,3 +50,26 @@ document.addEventListener('DOMContentLoaded', function(){
         "iDisplayLength": 10
     });
 });
+
+function editLerningResultModal(button){
+    let idLearningResult = button.getAttribute('lr');
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'EditLearningResult/getLearningResultById/' + idLearningResult;
+    request.open("GET", ajaxUrl, true);
+    request.send();
+
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status){
+                document.querySelector("#txtCodeEdit").value = objData.msg.codigo;
+                document.querySelector("#txtNameEdit").value = objData.msg.descripcion;
+                document.querySelector("#txtDescriptionEdit").value = objData.msg.detalle;
+            } else {
+                swal("Error", objData.msg, "error");
+            }
+        } 
+    }
+
+    $('#editLearningResultModal').modal('show');
+}

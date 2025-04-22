@@ -8,6 +8,8 @@
             $data['page_tag'] = $this->getLRTitleById($codeLR);
             $data['page_title'] = $this->getLRTitleById($codeLR);
             $data['page_functions_js'] = "functions_categories.js";
+            $session = strtolower(strClean($_POST['txtUser']));
+            $data['session'] = $session;
             $this->views->getView($this,"Category",$data);
         }
 
