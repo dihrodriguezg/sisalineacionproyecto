@@ -12,11 +12,11 @@
             return $request;
         }
 
-	public function searchLRTitleById(int $codeLR){
-            $querySelect = "SELECT nombre FROM categoria_conocimiento WHERE id = $codeLR";
-            $request = $this->select($querySelect);
-            return $request;
-        }
+        public function searchLRTitleById(int $codeLR){
+                $querySelect = "SELECT nombre FROM categoria_conocimiento WHERE id = $codeLR";
+                $request = $this->select($querySelect);
+                return $request;
+            }
 
         public function searchAllSubjectByLR(int $codeLR){
             $querySelect = "SELECT id, nombre, descripcion, categoria_id
@@ -25,5 +25,11 @@
             $request = $this->selectAll($querySelect);
             return $request;
         }
+
+        public function searchAllLearningResult(int $codeLR){
+            $querySelect = "SELECT * FROM categoria_conocimiento WHERE id = $codeLR";
+            $request = $this->selectAll($querySelect);
+            return $request;
+        }        
     }
 ?>

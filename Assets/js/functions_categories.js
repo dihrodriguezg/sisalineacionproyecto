@@ -12,14 +12,15 @@ document.addEventListener('DOMContentLoaded', function(){
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Category/getSubjectById/" + lastItem,
+            "url": " "+base_url+"/Category/getLearningResult/" + lastItem,
             "dataSrc":""
         },
         "columns":[
             {"data":"id"},
             {"data":"nombre"},
             {"data":"descripcion"},
-            {"data":"categoria_id"}
+            {"data":"categoria_id"},
+            {"data":"acciones"}
         ],
         dom: 'lBfrtip',
         buttons: [
