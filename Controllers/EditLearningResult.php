@@ -1,4 +1,5 @@
 <?php
+    session_start();
     class EditLearningResult extends Controllers{
 
         public function __construct(){
@@ -18,7 +19,8 @@
                     $data['page_functions_js'] = "functions_edit_lr.js";
                     $data['user'] = $strUser;
                     $data['pass'] = $strPassword;
-                    $data['session'] =  hash("SHA256", $strPassword);                    
+                    $data['session'] =  hash("SHA256", $strPassword);      
+                    $_SESSION['usuario'] = $usuario;              
                     $this->views->getView($this,"EditLearningResult",$data);
                 } else {
                     echo "<script> alert('Credenciales incorrectas');
