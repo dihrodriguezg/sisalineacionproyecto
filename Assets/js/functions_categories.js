@@ -12,14 +12,13 @@ document.addEventListener('DOMContentLoaded', function(){
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Category/getLearningResult/" + lastItem,
+            "url": " "+base_url+"/Category/getSubjectsByCategory/" + lastItem,
             "dataSrc":""
         },
         "columns":[
             {"data":"id"},
             {"data":"nombre"},
             {"data":"descripcion"},
-            {"data":"categoria_id"},
             {"data":"acciones"}
         ],
         dom: 'lBfrtip',
@@ -52,24 +51,27 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-function editLerningResultModal(button){
+function editLearningResultModal(button){
     let idLearningResult = button.getAttribute('lr');
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'EditLearningResult/getLearningResultById/' + idLearningResult;
+    let ajaxUrl = base_url+'Category/getSubjectById/' + idLearningResult;
     request.open("GET", ajaxUrl, true);
     request.send();
 
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
+            
             let objData = JSON.parse(request.responseText);
-            if(objData.status){
-                document.querySelector("#txtCodeEdit").value = objData.msg.codigo;
-                document.querySelector("#txtNameEdit").value = objData.msg.descripcion;
-                document.querySelector("#txtDescriptionEdit").value = objData.msg.detalle;
+            console.log("objData: "+JSON.stringify(objData));
+            if(true){
+                document.querySelector("#txtCodeEdit").value = objData.id;
+                document.querySelector("#txtNameEdit").value = objData.nombre;
+                document.querySelector("#txtDescriptionEdit").value = objData.descripcion;
             } else {
                 swal("Error", objData.msg, "error");
             }
         } 
+        
     }
 
     $('#editLearningResultModal').modal('show');
