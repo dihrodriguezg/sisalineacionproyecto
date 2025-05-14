@@ -51,28 +51,15 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-function editLearningResultModal(button){
+function getSubjectInfo(button){
     let idLearningResult = button.getAttribute('lr');
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'Category/getSubjectById/' + idLearningResult;
     request.open("GET", ajaxUrl, true);
+    request.onreadystatechange = function () {
+        window.location.href = base_url + 'SubjectInfo/getSubject/' + idLearningResult;
+       
+    };
     request.send();
 
-    request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
-            
-            let objData = JSON.parse(request.responseText);
-            console.log("objData: "+JSON.stringify(objData));
-            if(true){
-                document.querySelector("#txtCodeEdit").value = objData.id;
-                document.querySelector("#txtNameEdit").value = objData.nombre;
-                document.querySelector("#txtDescriptionEdit").value = objData.descripcion;
-            } else {
-                swal("Error", objData.msg, "error");
-            }
-        } 
-        
-    }
-
-    $('#editLearningResultModal').modal('show');
 }
