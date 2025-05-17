@@ -7,24 +7,19 @@
         public function SubjectInfo(int $codeLR){
             $data['page_tag'] = $this->getLRTitleById($codeLR);
             $data['page_title'] = $this->getLRTitleById($codeLR);
-            $data['page_functions_js'] = "functions_subjects_lr.js";
+            $data['page_functions_js'] = "functions_subject_info.js";
             $this->views->getView($this,"SubjectInfo",$data);
         }
 
-        public function getSubject(int $codeLR){
-            $data['page_tag'] = $this->getLRTitleById($codeLR);
-            $data['page_title'] = $this->getLRTitleById($codeLR);
-            $data['page_functions_js'] = "functions_subjects_lr.js";
-            $this->views->getView($this,"SubjectInfo",$data);
-            $htmlOptions = "";
-
+        public function findConcretResultBySubjectId(int $codeLR){
             $arrData = $this->model->findConcretResultBySubjectId($codeLR);
-            if(count($arrData) > 0){
-                for($i = 0; $i <count($arrData); $i++){
-                    $htmlOptions .= '<option value="'.$arrData[$i]['id'].'">'.$arrData[$i]['descripcion'].'</option>';
-                }
-            }
-            echo $htmlOptions;
+            for($i=0; $i<count($arrData); $i++){
+                $arrData[$i]['acciones'] = '<div class="text-center">
+                <button class="btn btn-outline-secondary btn-sm" id="btnEditLR" onclick="getSubjectInfo(this)" title="Editar" lr="'.$arrData[$i]['id'].'"><i class="fas fa-pencil-alt"></i></button>
+                <button class="btn btn-outline-danger btn-sm" id="btnDeleteLR" onclick="deleteLearningResult(this) "title="Eliminar" lr="'.$arrData[$i]['id'].'"><i class="far fa-trash-alt"></i></button>
+                </div>';
+            };
+            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
             die();
         }
 

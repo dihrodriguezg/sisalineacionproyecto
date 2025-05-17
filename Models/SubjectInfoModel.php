@@ -5,7 +5,7 @@
         }
 
         public function findConcretResultBySubjectId(int $subjectId){
-            $querySelect = "SELECT * FROM resultado_concreto_asignatura WHERE asignatura_id = $subjectId";
+            $querySelect = "SELECT id, nombre, descripcion FROM resultado_concreto_asignatura WHERE asignatura_id = $subjectId";
             $request = $this->selectAll($querySelect);
             return $request;
         }
