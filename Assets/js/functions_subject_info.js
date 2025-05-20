@@ -51,15 +51,58 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-function editButton(button){
+function editConcreteResultButton(button){
     let idLearningResult = button.getAttribute('lr');
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'Category/getSubjectById/' + idLearningResult;
+    let ajaxUrl = base_url+'SubjectInfo/findConcretResultById/' + idLearningResult;
     request.open("GET", ajaxUrl, true);
-    request.onreadystatechange = function () {
-        window.location.href = base_url + 'SubjectInfo/getSubject/' + idLearningResult;
-       
-    };
     request.send();
 
+    request.onreadystatechange = function(){
+        let objData = JSON.parse(request.responseText);
+        document.querySelector("#txtCodeEdit").value = objData.id;
+        document.querySelector("#txtNameEdit").value = objData.nombre;
+        document.querySelector("#txtDescriptionEdit").value = objData.descripcion;
+    }
+    $('#editLearningResultModal').modal('show');
 }
+
+function deleteConcreteResultButton(deleteButton){
+    let code = deleteButton.getAttribute('lr');
+    swal({
+        title: "Eliminar resultado concreto",
+        text: "¿Realmente quiere eliminar el resultado concreto?",
+        icon: "warning",
+        buttons: {
+            cancel: "¡No, cancelar!",
+            confirm: "¡Sí, eliminar!",
+          },
+        closeOnconfirm: false
+    }).then(result => {
+        if(result){
+            deleteExecution('SubjectInfo/deleteConcreteResult/'+ code);
+        } else {
+            swal("Cancelado", "El resultado concreto está a salvo", "error");
+        }
+        
+    });
+}
+
+function deleteExecution(url){
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+url;
+    request.open('POST', ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4){
+                let objData = JSON.parse(request.responseText);
+                if(objData.status){
+                    swal("¡Eliminado!", objData.msg, "success");
+                    assignLearningResultTable.ajax.reload();
+                } else {
+                    swal("Cancelado", objData.msg, "error");
+                }
+            }
+        }
+}
+
