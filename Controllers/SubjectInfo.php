@@ -53,5 +53,13 @@
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
             die();
         }
+
+        public function putConcreteResult(int $id){
+            $name = strClean($_POST['txtNameEdit']);
+            $description = strClean($_POST['txtDescriptionEdit']);
+            $data = $this->model->updateConcreteResult($id, $name, $description);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
 ?>

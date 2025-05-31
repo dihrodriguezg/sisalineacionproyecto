@@ -49,7 +49,39 @@ document.addEventListener('DOMContentLoaded', function(){
         "bDestroy": true,
         "iDisplayLength": 10
     });
+    
+
+   var dataFormEditLR = document.querySelector("#formEditLearningResult");
+
+    dataFormEditLR.onsubmit = function(e){
+        e.preventDefault();
+        var intCode = document.querySelector("#txtCodeEdit").value; 
+        var strName = document.querySelector("#txtNameEdit").value;
+        var strDescription = document.querySelector("#txtDescriptionEdit").value;
+        if(intCode == "" || strName == "" || strDescription == ""){
+            swal("Advertencia", "Todos los campos son obligatorios", "error");
+            return false;
+        }
+        postPutExecution(intCode, dataFormEditLR, '#editLearningResultModal', formEditLearningResult);
+    }
+
+
 });
+
+function postPutExecution(url, dataFormLR, modalName, formModal){
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'SubjectInfo/putConcreteResult/'+url;
+    let formData = new FormData(dataFormLR);
+    request.open('POST', ajaxUrl, true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            $(modalName).modal("hide");
+            formModal.reset();
+            swal("Resultados de aprendizaje", "Datos procesados correctamente.", "success");
+            assignLearningResultTable.ajax.reload();                    
+        }
+}
+
 
 function editConcreteResultButton(button){
     let idLearningResult = button.getAttribute('lr');
@@ -105,4 +137,3 @@ function deleteExecution(url){
             }
         }
 }
-

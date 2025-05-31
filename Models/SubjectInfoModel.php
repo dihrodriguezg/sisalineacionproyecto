@@ -29,5 +29,11 @@
             return $request;
         }
 
+        public function updateConcreteResult(int $code, string $name, string $description){
+            $queryUpdate = "UPDATE resultado_concreto_asignatura SET nombre = ?, descripcion = ?  WHERE id = ?";
+            $arrData = array($name, $description, $code);
+            $request = $this->update($queryUpdate, $arrData);
+            return $request;
+        }
     }
 ?>
