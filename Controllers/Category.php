@@ -32,7 +32,7 @@
             $arrData = $this->model->getSubjectsByCategory($codeLR);
             for($i=0; $i<count($arrData); $i++){
                 $arrData[$i]['acciones'] = '<div class="text-center">
-                <button class="btn btn-outline-secondary btn-sm" id="btnEditLR" onclick="editLearningResultModal(this)" title="Editar" lr="'.$arrData[$i]['id'].'"><i class="fas fa-pencil-alt"></i></button>
+                <button class="btn btn-outline-secondary btn-sm" id="btnEditLR" onclick="getSubjectInfo(this)" title="Editar" lr="'.$arrData[$i]['id'].'"><i class="fas fa-pencil-alt"></i></button>
                 <button class="btn btn-outline-danger btn-sm" id="btnDeleteLR" onclick="deleteLearningResult(this) "title="Eliminar" lr="'.$arrData[$i]['id'].'"><i class="far fa-trash-alt"></i></button>
                 </div>';
             };
