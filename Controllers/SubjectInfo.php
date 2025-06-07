@@ -4,9 +4,10 @@
             parent::__construct();
         }
 
-        public function SubjectInfo(int $codeLR){
-            $data['page_tag'] = $this->getLRTitleById($codeLR);
-            $data['page_title'] = $this->getLRTitleById($codeLR);
+        public function SubjectInfo(int $subjectId){
+            $data['page_tag'] = $this->getLRTitleById($subjectId);
+            $data['page_title'] = $this->getLRTitleById($subjectId);
+            $data['subjectId'] = $subjectId;
             $data['page_functions_js'] = "functions_subject_info.js";
             $this->views->getView($this,"SubjectInfo",$data);
         }
@@ -52,6 +53,20 @@
             $arrData = $this->model->searchAllSubjectByLR($codeLR);
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
             die();
+        }
+
+        public function addConcreteResult(){
+            $code = $this->getLastCode() + 1;
+            $name = strClean($_POST['txtNameAdd']);
+            $description = strClean($_POST['txtDescriptionAdd']);
+            $data = $this->model->saveConcreteResult($code, $name, $description, $data['subjectId']);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
+        private function getLastCode(){
+            $data = $this->model->searchLastCode();
+            return $data[0]['id'];
         }
 
         public function putConcreteResult(int $id){
