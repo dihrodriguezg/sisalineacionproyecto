@@ -3,7 +3,7 @@ var assignLearningResultTable;
 document.addEventListener('DOMContentLoaded', function(){
     let load = window.location.href;
     let arr = load.split("/");
-    let lastItem = arr[arr.length-1];
+    let subjectId = arr[arr.length-1];
 
     assignLearningResultTable = $('#subjectInfoTable').DataTable({
         "aProcessing":true,
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/SubjectInfo/findConcretResultBySubjectId/" + lastItem,
+            "url": " "+base_url+"/SubjectInfo/findConcretResultBySubjectId/" + subjectId,
             "dataSrc":""
         },
         "columns":[
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function(){
             swal("Advertencia", "Todos los campos son obligatorios", "error");
             return false;
         }
-        postPutExecution('SubjectInfo/addConcreteResult/' + lastItem, dataFormAddLR, '#addLearningResultModal', formAddLearningResult);
+        postPutExecution('SubjectInfo/addConcreteResult/' + subjectId, dataFormAddLR, '#addLearningResultModal', formAddLearningResult);
    }
 
 

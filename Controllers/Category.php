@@ -1,6 +1,4 @@
 <?php
-    session_start();    
-
     class Category extends Controllers{
         public function __construct(){
             parent::__construct();
