@@ -7,7 +7,6 @@
         public function SubjectInfo(int $subjectId){
             $data['page_tag'] = $this->getLRTitleById($subjectId);
             $data['page_title'] = $this->getLRTitleById($subjectId);
-            $data['subjectId'] = $subjectId;
             $data['page_functions_js'] = "functions_subject_info.js";
             $this->views->getView($this,"SubjectInfo",$data);
         }
@@ -17,7 +16,7 @@
             return $data['nombre'];
         }
 
-        public function findConcretResultBySubjectId(int $codeLR){
+        public function findConcretResultBySubjectId(int $codeLR){            
             $arrData = $this->model->findConcretResultBySubjectId($codeLR);
             for($i=0; $i<count($arrData); $i++){
                 $arrData[$i]['acciones'] = '<div class="text-center">
@@ -55,11 +54,12 @@
             die();
         }
 
-        public function addConcreteResult(){
+        public function addConcreteResult(string $subjectId){
             $code = $this->getLastCode() + 1;
             $name = strClean($_POST['txtNameAdd']);
             $description = strClean($_POST['txtDescriptionAdd']);
-            $data = $this->model->saveConcreteResult($code, $name, $description, $data['subjectId']);
+            $assignmentId = intval($subjectId);
+            $data = $this->model->saveConcreteResult($code, $name, $description, $assignmentId);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }

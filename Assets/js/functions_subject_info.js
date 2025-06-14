@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function(){
             swal("Advertencia", "Todos los campos son obligatorios", "error");
             return false;
         }
-        postPutExecution('SubjectInfo/addConcreteResult', dataFormAddLR, '#addLearningResultModal', formAddLearningResult);
+        postPutExecution('SubjectInfo/addConcreteResult/' + lastItem, dataFormAddLR, '#addLearningResultModal', formAddLearningResult);
    }
 
 
