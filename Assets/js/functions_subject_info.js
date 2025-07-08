@@ -3,7 +3,7 @@ var assignLearningResultTable;
 document.addEventListener('DOMContentLoaded', function(){
     let load = window.location.href;
     let arr = load.split("/");
-    let lastItem = arr[arr.length-1];
+    let subjectId = arr[arr.length-1];
 
     assignLearningResultTable = $('#subjectInfoTable').DataTable({
         "aProcessing":true,
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/SubjectInfo/findConcretResultBySubjectId/" + lastItem,
+            "url": " "+base_url+"/SubjectInfo/findConcretResultBySubjectId/" + subjectId,
             "dataSrc":""
         },
         "columns":[
@@ -50,8 +50,20 @@ document.addEventListener('DOMContentLoaded', function(){
         "iDisplayLength": 10
     });
     
-
+   var dataFormAddLR = document.querySelector("#formAddLearningResult");
    var dataFormEditLR = document.querySelector("#formEditLearningResult");
+
+   dataFormAddLR.onsubmit = function(e){
+        e.preventDefault();
+        var strName = document.querySelector("#txtNameAdd").value;
+        var strDescription = document.querySelector("#txtDescriptionAdd").value;
+        if(strName == "" || strDescription == ""){
+            swal("Advertencia", "Todos los campos son obligatorios", "error");
+            return false;
+        }
+        postPutExecution('SubjectInfo/addConcreteResult/' + subjectId, dataFormAddLR, '#addLearningResultModal', formAddLearningResult);
+   }
+
 
     dataFormEditLR.onsubmit = function(e){
         e.preventDefault();
@@ -62,15 +74,19 @@ document.addEventListener('DOMContentLoaded', function(){
             swal("Advertencia", "Todos los campos son obligatorios", "error");
             return false;
         }
-        postPutExecution(intCode, dataFormEditLR, '#editLearningResultModal', formEditLearningResult);
+        postPutExecution('SubjectInfo/putConcreteResult/' + intCode, dataFormEditLR, '#editLearningResultModal', formEditLearningResult);
     }
 
 
 });
 
+function addLerningResultModal(){
+    $('#addLearningResultModal').modal('show');
+}
+
 function postPutExecution(url, dataFormLR, modalName, formModal){
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'SubjectInfo/putConcreteResult/'+url;
+    let ajaxUrl = base_url + url;
     let formData = new FormData(dataFormLR);
     request.open('POST', ajaxUrl, true);
         request.send(formData);
