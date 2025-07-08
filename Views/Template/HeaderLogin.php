@@ -65,7 +65,9 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="<?= baseUrl();?>Logout">Salir</a>
+                        <form class="dropdown-item" name="logout" id="logout" action="<?= baseUrl() ?>Logout" method="post">
+                                <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Salir</button>
+                        </form>
                     </li>
                 </ul>
             </div>
