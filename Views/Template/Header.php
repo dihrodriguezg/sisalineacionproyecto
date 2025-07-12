@@ -1,3 +1,9 @@
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +41,7 @@
                         <a class="nav-link" aria-current="page" href="<?= baseUrl();?>learningResult">Resultados de aprendizaje</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link" aria-current="page" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Perfil resultados de aprendizaje
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -43,9 +49,17 @@
                             <li><a class="dropdown-item" href="<?= baseUrl();?>SurveyStats/SurveyStats/1">Encuesta a estudiantes</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= baseUrl();?>Login">Ingresar</a>
+                        <li class="nav-item">
+                        <form name="EALR" id="EALR" action="<?= baseUrl() ?>EditAssignLearningResult" method="post">
+                                <input type="hidden" id="txtUser" name="txtUser" class="form-control"/>
+                                <button id="menuBtns" class="btn btn-link" aria-current="page" type="submit">Asignación de resultados de aprendizaje</button>
+                        </form>
                     </li>
+                    <?php if (isset($_SESSION['session'])): ?>
+                        <a class="nav-link" aria-current="page" href="<?= baseUrl();?>Logout">Salir</a>
+                    <?php else: ?>
+                        <a class="nav-link" aria-current="page" href="<?= baseUrl();?>Login">Ingresar</a>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<?php pageHeaderLogin($data);?>
+<?php pageHeader($data);?>
     <?php getModal('EditLearningResultModal', $data);?>
     <div class="row justify-content-center" id="card-content-page">
     <div class="col-10">
