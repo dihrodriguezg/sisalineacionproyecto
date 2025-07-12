@@ -1,9 +1,4 @@
 <?php
-    /*session_start();
-    if (isset($_SESSION['session'])) {
-        echo $_SESSION['session'];
-    }*/
-
     require_once("Config/Config.php");
     require_once("Helpers/Helpers.php");
     $url = !empty($_GET['url']) ? $_GET['url'] : 'LearningResult/LearningResult';
