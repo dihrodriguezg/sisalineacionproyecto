@@ -16,8 +16,8 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>  
+                                <th>Asignatura</th>
+                                <th>Resultado resumido</th>  
                                 <th>Acciones</th>                        
                             </tr>
                         </thead>

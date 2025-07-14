@@ -7,7 +7,9 @@
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h3><?= $data['page_title'];?></h3>
-              <button class="btn btn-success" type="button" onclick="addLerningResultModal()"><i class="fas fa-plus-circle"></i> Agregar</button>
+                   <?php if (isset($_SESSION['session'])): ?>
+                        <button class="btn btn-success" type="button" onclick="addLerningResultModal()"><i class="fas fa-plus-circle"></i> Agregar</button>
+                    <?php endif; ?>
           </div>            
         <div class="card-body row justify-content-center" id="card-body-page">
                 <div class="col-11">
@@ -18,7 +20,7 @@
                         <thead>
                             <tr>    
                                 <th>Id</th>
-                                <th>Nombre</th>
+                                <th>Resultado concreto</th>
                                 <th>Descripción</th>
                                 <th>Acciones</th>
                             </tr>
