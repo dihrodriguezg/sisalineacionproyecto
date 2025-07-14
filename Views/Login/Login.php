@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Laura Ahumada - Santiago Leon" content="Abel OSH">
     <meta name="theme-color" content="#009688">
     <link rel="shortcut icon" href="<?= media();?>/images/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -30,7 +29,7 @@
                     <h4 class="mt-1 mb-5 pb-1"><?= $data['page_title']; ?></h4>
                     </div>
 
-                    <form name="formLogin" id="formLogin" action="<?= baseUrl() ?>EditLearningResult" method="post">
+                    <form name="formLogin" id="formLogin" action="<?= baseUrl() ?>Login/validateSession" method="post">
                         <div class="form-outline mb-4">
                             <input type="text" id="txtUser" name="txtUser" class="form-control"
                             placeholder="Usuario" />
