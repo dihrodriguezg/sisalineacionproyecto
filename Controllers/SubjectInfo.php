@@ -22,7 +22,6 @@
             if (isset($_SESSION['session'])) {
                 for($i=0; $i<count($arrData); $i++){
                     $arrData[$i]['acciones'] = '<div class="text-center">
-                    <button class="btn btn-outline-secondary btn-sm" id="btnEditLR" onclick="editConcreteResultButton(this)" title="Editar" lr="'.$arrData[$i]['id'].'"><i class="fas fa-pencil-alt"></i></button>
                     <button class="btn btn-outline-danger btn-sm" id="btnDeleteLR" onclick="deleteConcreteResultButton(this)" title="Eliminar" lr="'.$arrData[$i]['id'].'"><i class="far fa-trash-alt"></i></button>
                     </div>';
                 };
@@ -31,7 +30,6 @@
             }else{
                 for($i=0; $i<count($arrData); $i++){
                     $arrData[$i]['acciones'] = '<div class="text-center">
-                    <button disabled class="btn btn-outline-secondary btn-sm" id="btnEditLR" title="Editar" lr="'.$arrData[$i]['id'].'"><i class="fas fa-pencil-alt"></i></button>
                     <button disabled class="btn btn-outline-danger btn-sm" id="btnDeleteLR" title="Eliminar" lr="'.$arrData[$i]['id'].'"><i class="far fa-trash-alt"></i></button>
                     </div>';
                 };

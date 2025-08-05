@@ -19,8 +19,8 @@
                         <table class="table table-hover table-centered table-bordered mb-0" id="subjectInfoTable" style="width:100%">
                         <thead>
                             <tr>    
-                                <th>Id</th>
-                                <th>Resultado concreto</th>
+                                <th>Id Asignatura</th>
+                                <th>Id Resultado concreto</th>
                                 <th>Descripción</th>
                                 <th>Acciones</th>
                             </tr>
