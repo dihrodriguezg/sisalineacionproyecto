@@ -31,10 +31,12 @@
                             Categorías del conocimiento
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/1">Categoría 1</a></li>
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/2">Categoría 2</a></li>
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/3">Categoría 3</a></li>
-                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/4">Categoría 4</a></li>
+                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/1">Ciencias Básicas</a></li>
+                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/2">Socio Humanística</a></li>
+                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/3">Básicas de la Ingeniería</a></li>
+                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/4">Ingeniería Aplicada</a></li>                            
+                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/5">Económico-Administrativa</a></li>                            
+                            <li><a class="dropdown-item" href="<?= baseUrl();?>Category/Category/6">Sin Categoría</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

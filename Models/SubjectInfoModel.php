@@ -5,7 +5,17 @@
         }
 
         public function findConcretResultBySubjectId(int $subjectId){
-            $querySelect = "SELECT id, nombre, descripcion FROM resultado_concreto_asignatura WHERE asignatura_id = $subjectId";
+            $querySelect = "SELECT 
+                                a.id AS id,
+                                rca.id AS rid,
+                                rca.descripcion AS rad
+                            FROM asignatura a
+                            JOIN asignatura_resultado_concreto arc
+                                ON a.id = arc.asignatura_id
+                            JOIN resultado_concreto_asignatura rca
+                                ON arc.resultado_concreto_id = rca.id
+                            WHERE a.id = $subjectId
+                            ORDER BY rca.id";            
             $request = $this->selectAll($querySelect);
             return $request;
         }

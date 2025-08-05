@@ -18,6 +18,7 @@
                                 <th>Id</th>
                                 <th>Asignatura</th>
                                 <th>Resultado resumido</th>  
+                                <th>Clasificación</th>                          
                                 <th>Acciones</th>                        
                             </tr>
                         </thead>
