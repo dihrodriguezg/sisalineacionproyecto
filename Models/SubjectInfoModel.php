@@ -33,8 +33,8 @@
             return $request;
         }
 
-        public function deleteConcreteResult(int $id){
-            $sql = "DELETE FROM resultado_concreto_asignatura WHERE id = $id";
+        public function deleteConcreteResult(int $id, int $assignmentId){
+            $sql = "DELETE FROM asignatura_resultado_concreto WHERE resultado_concreto_id = $id AND asignatura_id = $assignmentId";
             $request = $this->delete($sql);
             return $request;
         }
@@ -52,17 +52,12 @@
             return $request;
         }
 
-        public function saveConcreteResult(int $id, string $name, string $description, int $assignmentId){
+        public function saveConcreteResult(int $concreteResultId, int $assignmentId){
             $return = "";
-            $requestSelect = $this->searchLearningResultByName($name);
-            if(empty($requestSelect)){
-                $queryInsert = "INSERT INTO resultado_concreto_asignatura(id,nombre,descripcion,asignatura_id) VALUES(?,?,?,?)";
-                $arrData = array($id, $name, $description, $assignmentId);
-                $request = $this->insert($queryInsert, $arrData);
-                $return = $request;
-            }else{
-                $return = "exist";
-            }        
+            $queryInsert = "INSERT INTO asignatura_resultado_concreto(resultado_concreto_id, asignatura_id) VALUES(?,?)";
+            $arrData = array($concreteResultId, $assignmentId);
+            $request = $this->insert($queryInsert, $arrData);
+            $return = $request;    
             return $return;   
         }
 
