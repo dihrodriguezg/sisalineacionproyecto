@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function(){
         },
         "columns":[
             {"data":"id"},
-            {"data":"nombre"},
-            {"data":"descripcion"},
+            {"data":"rid"},
+            {"data":"rad"},
             {"data":"acciones"}
         ],
         dom: 'lBfrtip',
@@ -50,20 +50,28 @@ document.addEventListener('DOMContentLoaded', function(){
         "iDisplayLength": 10
     });
     
-   var dataFormAddLR = document.querySelector("#formAddLearningResult");
+   var dataFormAddLR = document.querySelector("#formAddConcreteLearningResult");
    var dataFormEditLR = document.querySelector("#formEditLearningResult");
 
-   dataFormAddLR.onsubmit = function(e){
-        e.preventDefault();
-        var strName = document.querySelector("#txtNameAdd").value;
-        var strDescription = document.querySelector("#txtDescriptionAdd").value;
-        if(strName == "" || strDescription == ""){
-            swal("Advertencia", "Todos los campos son obligatorios", "error");
-            return false;
-        }
-        postPutExecution('SubjectInfo/addConcreteResult/' + subjectId, dataFormAddLR, '#addLearningResultModal', formAddLearningResult);
-   }
+   dataFormAddLR.onsubmit = function(e) {
+    e.preventDefault();
+    
+    const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="learning_results[]"]:checked'))
+        .map(checkbox => checkbox.value);
+    const subjectId = document.querySelector("#subjectId").value;
+    
+    if (selectedCheckboxes.length === 0) {
+        swal(subjectId, "Debe seleccionar al menos un resultado de aprendizaje", "error");
+        return false;
+    }
 
+    dataFormAddLR.append('subjectId', document.querySelector("#subjectId").value);
+    selectedCheckboxes.forEach((value, index) => {
+        dataFormAddLR.append(`learning_results[${index}]`, value);
+    });
+
+    postPutExecution('SubjectInfo/addConcreteResult/' + subjectId, dataFormAddLR, '#addLearningResultModal', formAddConcreteLearningResult);
+}
 
     dataFormEditLR.onsubmit = function(e){
         e.preventDefault();
@@ -116,7 +124,9 @@ function editConcreteResultButton(button){
 }
 
 function deleteConcreteResultButton(deleteButton){
-    let code = deleteButton.getAttribute('lr');
+    let lrId = deleteButton.getAttribute('lr');
+    let assignmentId = deleteButton.getAttribute('assignmentId');
+
     swal({
         title: "Eliminar resultado concreto",
         text: "¿Realmente quiere eliminar el resultado concreto?",
@@ -128,7 +138,7 @@ function deleteConcreteResultButton(deleteButton){
         closeOnconfirm: false
     }).then(result => {
         if(result){
-            deleteExecution('SubjectInfo/deleteConcreteResult/'+ code);
+            deleteExecution('SubjectInfo/deleteConcreteResult/'+ lrId +'/'+ assignmentId);
         } else {
             swal("Cancelado", "El resultado concreto está a salvo", "error");
         }

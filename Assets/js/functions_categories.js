@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function(){
         "columns":[
             {"data":"id"},
             {"data":"nombre"},
-            {"data":"descripcion"},
+            {"data":"rr"},
+            {"data":"clasificacion"},
             {"data":"acciones"}
         ],
         dom: 'lBfrtip',
