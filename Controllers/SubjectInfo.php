@@ -7,7 +7,8 @@
 
         public function SubjectInfo(int $subjectId){
             $data['page_tag'] = $this->getLRTitleById($subjectId);
-            $data['page_title'] = $this->getLRTitleById($subjectId);
+            $data['page_title'] = $this->getLRTitleById($subjectId);            
+            $data['subject_id'] = $subjectId;
             $data['page_functions_js'] = "functions_subject_info.js";
             $this->views->getView($this,"SubjectInfo",$data);
         }
@@ -22,7 +23,7 @@
             if (isset($_SESSION['session'])) {
                 for($i=0; $i<count($arrData); $i++){
                     $arrData[$i]['acciones'] = '<div class="text-center">
-                    <button class="btn btn-outline-danger btn-sm" id="btnDeleteLR" onclick="deleteConcreteResultButton(this)" title="Eliminar" lr="'.$arrData[$i]['id'].'"><i class="far fa-trash-alt"></i></button>
+                    <button class="btn btn-outline-danger btn-sm" id="btnDeleteLR" onclick="deleteConcreteResultButton(this)" title="Eliminar" lr="'.$arrData[$i]['rid'].'" assignmentId="'.$arrData[$i]['id'].'"><i class="far fa-trash-alt"></i></button>
                     </div>';
                 };
                 echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
@@ -47,8 +48,9 @@
             die();
         }
 
-        public function deleteConcreteResult(int $id){
-            $data = $this->model->deleteConcreteResult($id);
+        public function deleteConcreteResult(string $params){
+            $arrParams = explode(',', $params);
+            $data = $this->model->deleteConcreteResult(intval($arrParams[0]), intval($arrParams[1]));
             if (empty($data)){
                 $data = array('status' => false, 'msg' => 'No es posible eliminar los datos.');
             } else {
@@ -65,11 +67,11 @@
         }
 
         public function addConcreteResult(string $subjectId){
-            $code = $this->getLastCode() + 1;
-            $name = strClean($_POST['txtNameAdd']);
-            $description = strClean($_POST['txtDescriptionAdd']);
+            $selectedCheckboxes = $_POST['learning_results'];
             $assignmentId = intval($subjectId);
-            $data = $this->model->saveConcreteResult($code, $name, $description, $assignmentId);
+            foreach($selectedCheckboxes as $checkbox){
+                $data = $this->model->saveConcreteResult(intval($checkbox), $assignmentId);
+            }
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }

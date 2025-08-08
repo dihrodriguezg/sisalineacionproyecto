@@ -1,6 +1,5 @@
 <?php pageHeader($data);?>
-    <?php getModal('AddLearningResultModal', $data);?>
-    <?php getModal('EditLearningResultModal', $data);?>
+    <?php getModal('AddConcreteLearningResultModal', $data);?>
     
     <div class="row justify-content-center" id="card-content-page">
     <div class="col-10">
