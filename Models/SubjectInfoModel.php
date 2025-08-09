@@ -67,5 +67,15 @@
             return $request;
         }
 
+        public function getRemainingConcretLearningResult(int $subjectId){
+            $sql = "SELECT rca.id, rca.descripcion 
+                    FROM resultado_concreto_asignatura rca 
+                    LEFT JOIN asignatura_resultado_concreto arc ON rca.id = arc.resultado_concreto_id 
+                    AND arc.asignatura_id = $subjectId 
+                    WHERE arc.resultado_concreto_id IS NULL
+                    ORDER BY rca.id";
+            $request = $this->selectAll($sql);
+            return $request;
+        }
     }
 ?>
