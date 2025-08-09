@@ -65,9 +65,22 @@ document.addEventListener('DOMContentLoaded', function(){
         return false;
     }
 
-    dataFormAddLR.append('subjectId', document.querySelector("#subjectId").value);
+
+    const hiddenContainer = document.getElementById('hiddenInputsContainer');
+    if (hiddenContainer) hiddenContainer.innerHTML = '';
+
+    const subjectIdInput = document.createElement('input');
+    subjectIdInput.type = 'hidden';
+    subjectIdInput.name = 'subjectId';
+    subjectIdInput.value = subjectId;
+    dataFormAddLR.appendChild(subjectIdInput);
+
     selectedCheckboxes.forEach((value, index) => {
-        dataFormAddLR.append(`learning_results[${index}]`, value);
+        const lrInput = document.createElement('input');
+        lrInput.type = 'hidden';
+        lrInput.name = `learning_results[${index}]`;
+        lrInput.value = value;
+        dataFormAddLR.appendChild(lrInput);
     });
 
     postPutExecution('SubjectInfo/addConcreteResult/' + subjectId, dataFormAddLR, '#addLearningResultModal', formAddConcreteLearningResult);
@@ -89,7 +102,49 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function addLerningResultModal(){
-    $('#addLearningResultModal').modal('show');
+    let load = window.location.href;
+    let arr = load.split("/");
+    let subjectId = arr[arr.length-1];
+
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + 'SubjectInfo/getRemainingLearningResults/' + subjectId;
+    request.open("GET", ajaxUrl, true);
+    request.send();
+
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let learningResults = JSON.parse(request.responseText);
+            let fieldset = document.querySelector('#formAddConcreteLearningResult .scrollable-fieldset');
+            fieldset.innerHTML = '';
+
+            if(learningResults.length > 0) {
+                learningResults.forEach(function(lr) {
+                    let div = document.createElement('div');
+                    div.className = 'form-check';
+
+                    let input = document.createElement('input');
+                    input.className = 'form-check-input';
+                    input.type = 'checkbox';
+                    input.name = 'learning_results[]';
+                    input.value = lr.id;
+                    input.id = 'lr_' + lr.id;
+
+                    let label = document.createElement('label');
+                    label.className = 'form-check-label';
+                    label.htmlFor = 'lr_' + lr.id;
+                    label.textContent = lr.id + ' - ' + lr.descripcion;
+
+                    div.appendChild(input);
+                    div.appendChild(label);
+                    fieldset.appendChild(div);
+                });
+            } else {
+                fieldset.innerHTML = '<p>No hay resultados de aprendizaje disponibles para agregar.</p>';
+            }
+
+            $('#addLearningResultModal').modal('show');
+        }
+    }
 }
 
 function postPutExecution(url, dataFormLR, modalName, formModal){

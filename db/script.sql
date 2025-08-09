@@ -60,7 +60,7 @@ INSERT INTO asignatura (id, nombre, resultado_resumido, clasificacion_id, catego
 (18, 'Segunda Lengua I - Italiano', 'Resultado resumido Segunda Lengua I - Italiano', 2, 6),
 (19, 'Segunda Lengua I - Portugués', 'Resultado resumido Segunda Lengua I - Portugués', 2, 6),
 (20, 'Segunda Lengua I - Mandarín', 'Resultado resumido Segunda Lengua I - Mandarín', 2, 6),
-(21, 'Contabilidad General', 'Resultado resumido Contabilidad General', 3, 6),
+(21, 'Contabilidad General', 'Resultado resumido Contabilidad General', 3, 5),
 (22, 'Fundamentos de Organización', 'Resultado resumido Fundamentos de Organización', 3, 5),
 (23, 'Física II: Electromagnetismo', 'Resultado resumido Física II: Electromagnetismo', 1, 1),
 (24, 'Ciencia Tecnología y Sociedad', 'Resultado resumido Ciencia Tecnología y Sociedad', 2, 2),
