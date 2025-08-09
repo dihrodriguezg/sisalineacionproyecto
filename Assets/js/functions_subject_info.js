@@ -65,9 +65,22 @@ document.addEventListener('DOMContentLoaded', function(){
         return false;
     }
 
-    dataFormAddLR.append('subjectId', document.querySelector("#subjectId").value);
+
+    const hiddenContainer = document.getElementById('hiddenInputsContainer');
+    if (hiddenContainer) hiddenContainer.innerHTML = '';
+
+    const subjectIdInput = document.createElement('input');
+    subjectIdInput.type = 'hidden';
+    subjectIdInput.name = 'subjectId';
+    subjectIdInput.value = subjectId;
+    dataFormAddLR.appendChild(subjectIdInput);
+
     selectedCheckboxes.forEach((value, index) => {
-        dataFormAddLR.append(`learning_results[${index}]`, value);
+        const lrInput = document.createElement('input');
+        lrInput.type = 'hidden';
+        lrInput.name = `learning_results[${index}]`;
+        lrInput.value = value;
+        dataFormAddLR.appendChild(lrInput);
     });
 
     postPutExecution('SubjectInfo/addConcreteResult/' + subjectId, dataFormAddLR, '#addLearningResultModal', formAddConcreteLearningResult);
