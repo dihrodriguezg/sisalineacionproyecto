@@ -1,24 +1,25 @@
 <?php pageHeader($data);?>
-
+    <?php getModal('EditLearningResultModal', $data);?>
     <div class="row justify-content-center" id="card-content-page">
     <div class="col-10">
         <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h3><?= $data['page_title'];?></h3>
-            <a id="back-link" href="<?= baseUrl();?>LearningResult"><i class="fa fa-chevron-left"></i></i> Atrás</a>
+            <a id="back-link" href="<?= baseUrl();?>"><i class="fa fa-chevron-left"></i></i> Atrás</a>
         </div>
         <div class="card-body row justify-content-center" id="card-body-page">
                 <div class="col-11">
                 <div class="tile">
                     <div class="tile-body">
                     <div class="table-responsive">
-                        <table class="table table-hover table-centered table-bordered mb-0" id="subjectLRTable" style="width:100%">
+                        <table class="table table-hover table-centered table-bordered mb-0" id="subjectCategoryTable" style="width:100%">
                         <thead>
                             <tr>
-                            <th>Id Asignatura</th>
-                            <th>Asignatura</th>
-                            <th>Resultado resumido</th>
-                            <th>Resultados concretos</th>                            
+                                <th>Id</th>
+                                <th>Asignatura</th>
+                                <th>Resultado resumido</th>  
+                                <th>Clasificación</th>                          
+                                <th>Acciones</th>                        
                             </tr>
                         </thead>
                         <tbody>

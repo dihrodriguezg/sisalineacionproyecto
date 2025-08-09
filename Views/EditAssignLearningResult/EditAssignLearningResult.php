@@ -1,4 +1,4 @@
-<?php pageHeaderLogin($data);?>
+<?php pageHeader($data);?>
 <?php getModal('AddAssignLearningResultModal', $data);?>
 <?php getModal('EditAssignLearningResultModal', $data);?>
 

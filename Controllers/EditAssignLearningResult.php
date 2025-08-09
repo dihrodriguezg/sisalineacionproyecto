@@ -5,27 +5,10 @@
         }
 
         public function EditAssignLearningResult(){
-            if($_POST && !empty($_POST['txtUser']) && !empty($_POST['txtPassword'])){
-                $strUser = strtolower(strClean($_POST['txtUser']));
-                if(strlen($_POST['txtPassword']) < 64){
-                    $strPassword = hash("SHA256", strClean($_POST['txtPassword']));
-                } else{
-                    $strPassword = strClean($_POST['txtPassword']);
-                }
-                $requestUser = $this->model->validateSession($strUser, $strPassword);
-                if(!empty($requestUser)){
-                    $data['page_tag'] = "Modificar Asignación de Resultados de Aprendizaje";
-                    $data['page_title'] = "Modificación Asignación de Resultados de Aprendizaje";
-                    $data['page_functions_js'] = "functions_assign_lr.js";
-                    $data['user'] = $strUser;
-                    $data['pass'] = $strPassword;
-                    $this->views->getView($this,"EditAssignLearningResult",$data);
-                } else {
-                    echo "<script>window.location.href='".baseUrl()."Login'</script>";
-                }
-            }else {
-                echo "<script>window.location.href='".baseUrl()."Login'</script>";
-            }
+            $data['page_tag'] = "Modificar Asignación de Resultados de Aprendizaje";
+            $data['page_title'] = "Modificación Asignación de Resultados de Aprendizaje";
+            $data['page_functions_js'] = "functions_assign_lr.js";
+            $this->views->getView($this,"EditAssignLearningResult",$data);
         }
 
         public function getAssignLearningResultById(int $idALR){

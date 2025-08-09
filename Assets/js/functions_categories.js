@@ -5,21 +5,22 @@ document.addEventListener('DOMContentLoaded', function(){
     let arr = load.split("/");
     let lastItem = arr[arr.length-1];
 
-    assignLearningResultTable = $('#subjectLRTable').DataTable({
+    assignLearningResultTable = $('#subjectCategoryTable').DataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Subject/getSubjectById/" + lastItem,
+            "url": " "+base_url+"/Category/getSubjectsByCategory/" + lastItem,
             "dataSrc":""
         },
         "columns":[
-            {"data":"codigo"},
-            {"data":"name_subject"},
-            {"data":"name_teacher"},
-            {"data":"lastname_teacher"}
+            {"data":"id"},
+            {"data":"nombre"},
+            {"data":"rr"},
+            {"data":"clasificacion"},
+            {"data":"acciones"}
         ],
         dom: 'lBfrtip',
         buttons: [
@@ -50,3 +51,16 @@ document.addEventListener('DOMContentLoaded', function(){
         "iDisplayLength": 10
     });
 });
+
+function getSubjectInfo(button){
+    let idLearningResult = button.getAttribute('lr');
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'Category/getSubjectById/' + idLearningResult;
+    request.open("GET", ajaxUrl, true);
+    request.onreadystatechange = function () {
+        window.location.href = base_url + 'SubjectInfo/SubjectInfo/' + idLearningResult;
+       
+    };
+    request.send();
+
+}

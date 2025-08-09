@@ -4,27 +4,36 @@
             parent::__construct();
         }
 
-        public function searchAllSubject(){
-            $querySelect = "SELECT codigo, nombre FROM res_espacio";
-            $request = $this->selectAll($querySelect);
-            return $request;
-        }
+        public function getCategoryById(int $codeLR){
+                $querySelect = "SELECT nombre FROM categoria_conocimiento WHERE id = $codeLR";
+                $request = $this->select($querySelect);
+                return $request;
+            }
 
-	public function searchLRTitleById(int $codeLR){
-            $querySelect = "SELECT nombre FROM res_clasifica_espacio WHERE codigo = $codeLR";
+        public function getSubjectById(int $codeLR){
+            $querySelect = "SELECT id, nombre, resultado_resumido as rr
+                            FROM asignatura 
+                            WHERE id = $codeLR";
             $request = $this->select($querySelect);
             return $request;
         }
 
-        public function searchAllSubjectByLR(int $codeLR){
-            $querySelect = "SELECT esp.codigo, esp.nombre AS name_subject, prof.nombre AS name_teacher, prof.apellido AS lastname_teacher
-                            FROM res_asignacion_resultados_de_aprendizaje ara
-                            INNER JOIN res_espacio esp ON ara.codigo_espacio = esp.codigo
-                            INNER JOIN res_profesor prof ON ara.codigo_profesor = prof.codigo
-                            INNER JOIN res_resultados_de_aprendizaje ra ON ara.codigo_resultados = ra.codigo 
-                            WHERE ra.codigo = $codeLR;";
+        public function getSubjectsByCategory(int $codeLR){
+            $querySelect = "SELECT 
+                                a.id AS id,
+                                a.nombre AS nombre,
+                                a.resultado_resumido AS rr,
+                                c.id AS cc_id,
+                                cl.nombre AS clasificacion
+                            FROM asignatura a
+                            JOIN categoria_conocimiento c 
+                                ON a.categoria_conocimiento_id = c.id
+                            JOIN clasificacion_asignatura cl
+                                ON a.clasificacion_id = cl.id
+                            WHERE c.id = $codeLR
+                            ORDER BY a.id;";
             $request = $this->selectAll($querySelect);
             return $request;
-        }
+        }        
     }
 ?>
