@@ -240,3 +240,39 @@ footer p {
     text-decoration: none;
     color: rgba(0,0,0,.55);
 }
+
+
+.scrollable-fieldset {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.form-check {
+    padding: 10px 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.scrollable-fieldset::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-fieldset::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.scrollable-fieldset::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.scrollable-fieldset::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.scrollable-fieldset .form-check:last-child {
+    border-bottom: none;
+}
