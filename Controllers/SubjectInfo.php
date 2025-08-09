@@ -88,5 +88,11 @@
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }
+
+        public function getRemainingLearningResults(int $subjectId){
+            $arrData = $this->model->getRemainingConcretLearningResult($subjectId);
+            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
 ?>
